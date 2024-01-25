@@ -20,6 +20,12 @@ variable "tags" {
 ################################################################################
 ## github
 ################################################################################
+variable "create_github_oidc_provider" {
+  type        = bool
+  description = "Create the OIDC GitHub Provider. If false, this module assume it exists and does a data lookup."
+  default     = true
+}
+
 variable "github_thumbprint_list" {
   type        = list(string)
   description = "GitHub thumbprint list"
@@ -59,8 +65,8 @@ variable "policies" {
   default = []
 }
 
-variable "aws_managed_iam_policy_names" {
+variable "additional_iam_policy_names" {
   type        = list(string)
-  description = "List of AWS Managed IAM Policy names to assign to the created IAM Role"
+  description = "List of IAM Policy names to lookup and assign to the created IAM Role"
   default     = []
 }

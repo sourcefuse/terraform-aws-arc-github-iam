@@ -57,7 +57,7 @@ module "github_iam" {
       policy_json = data.aws_iam_policy_document.s3.json
     }
   ]
-  aws_managed_iam_policy_names = [
+  additional_iam_policy_names = [
     "ReadOnlyAccess"
   ]
 

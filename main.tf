@@ -16,7 +16,8 @@ terraform {
 ## openid connect
 ################################################################################
 resource "aws_iam_openid_connect_provider" "github" {
-  url = "https://token.actions.githubusercontent.com"
+  count = var.create_github_oidc_provider ? 1 : 0
+  url   = "https://token.actions.githubusercontent.com"
 
   client_id_list = [
     "sts.amazonaws.com"
@@ -41,7 +42,7 @@ resource "aws_iam_role" "this" {
         Action = "sts:AssumeRoleWithWebIdentity",
         Effect = "Allow"
         Principal = {
-          Federated = aws_iam_openid_connect_provider.github.arn
+          Federated = var.create_github_oidc_provider ? one(aws_iam_openid_connect_provider.github[*].arn) : one(data.aws_iam_openid_connect_provider.github[*].arn)
         }
         Condition = {
           StringLike = {
