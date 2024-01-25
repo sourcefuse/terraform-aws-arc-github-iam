@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
       - name: Pushes Readme file
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
@@ -18,7 +19,7 @@ jobs:
         with:
           source_file: 'README.md'
           destination_repo: 'sourcefuse/arc-docs'
-          destination_folder: 'docs/arc-iac-docs/modules/terraform-aws-arc-security'
+          destination_folder: 'docs/arc-iac-docs/modules/terraform-aws-arc-github-iam'
           user_email: 'github-actions@github.com'
           user_name: ${{ github.actor }}
           commit_message: ${{ github.event.head_commit.message }}

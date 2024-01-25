@@ -1,5 +1,5 @@
 ---
-name: Test
+name: snyk
 
 on:  # yamllint disable-line rule:truthy
   push:
@@ -11,47 +11,29 @@ on:  # yamllint disable-line rule:truthy
       - main
 
 jobs:
-  tflint:
+  security:
     runs-on:
-      - arc
-    name: tflint
+      - ubuntu-latest
+    name: snyk
     steps:
-      - uses: actions/checkout@master
+      - name: checkout
+        uses: actions/checkout@v2
 
-      - uses: terraform-linters/setup-tflint@v1
+      - name: Vulnerability scan
+        uses: snyk/actions/iac@master
         with:
-          tflint_version: latest
+          command: monitor
+          args: --severity-threshold=low
 
-      - name: Show version
-        run: tflint --version
-
-      - name: Init tflint
-        run: tflint --init
-
-      - name: Run tflint
-        run: tflint -f compact
-
-  checkov:
-    runs-on:
-      - arc
-    name: checkov
-    steps:
-      - uses: actions/checkout@master
-
-      - name: Run Checkov action
-        id: checkov
-        uses: bridgecrewio/checkov-action@master
+      - name: Set up Node 16
+        uses: actions/setup-node@v3
         with:
-          directory: .
-          # yamllint disable-line rule:truthy # optional: display only failed checks
-          quiet: true
-          # optional: do not return an error code if there are failed checks.
-          soft_fail: true
-          # optional: run only on a specific infrastructure {cloudformation,terraform,kubernetes,all}
-          framework: terraform
-          # optional: the output format, one of: cli, json, junitxml, github_failed_only
-          output_format: github_failed_only
-          download_external_modules: false
-          log_level: WARNING
-          # optional: Define what UID and / or what GID to run the container under to prevent permission issues
-          container_user: 1000
+          node-version: 16
+
+      - name: install Snyk CLI
+        run: npm install -g snyk
+
+      - name: snyk monitor
+        run: snyk iac test --report
+        env:
+          SNYK_TOKEN: ${{ secrets.ARC_SNYK_TOKEN }}
