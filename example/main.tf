@@ -53,7 +53,7 @@ module "github_iam" {
   ## policies
   policies = [
     {
-      name   = "${var.namespace}-${var.environment}-s3-access"
+      name        = "${var.namespace}-${var.environment}-s3-access"
       policy_json = data.aws_iam_policy_document.s3.json
     }
   ]

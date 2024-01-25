@@ -1,4 +1,4 @@
-# terraform-aws-module-template example
+# terraform-aws-arc-github-iam example
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements

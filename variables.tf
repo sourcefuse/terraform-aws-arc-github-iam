@@ -52,8 +52,8 @@ variable "role_max_session_duration" {
 variable "policies" {
   description = "The IAM policies to create and attach to the IAM role for managing AWS resources"
   type = list(object({
-    name   = string
-    path   = optional(string, "/")
+    name        = string
+    path        = optional(string, "/")
     policy_json = any
   }))
   default = []

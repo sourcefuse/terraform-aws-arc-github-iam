@@ -8,12 +8,34 @@
 
 SourceFuse AWS Reference Architecture (ARC) Terraform module for managing GitHub OIDC IAM access to your account.
 
+Please note, this module creates an identity provider for your AWS account. You can only have **ONE** GitHub identity provider per AWS account.
+
 ## Usage
 To see a full example, check out the [main.tf](./example/main.tf) file in the example folder.
 
 ```hcl
 module "github_iam" {
+  source = "../"
 
+  environment = var.environment
+  namespace   = var.namespace
+
+  ## role settings
+  role_max_session_duration = var.role_max_session_duration
+  github_subscriptions      = var.github_subscriptions
+
+  ## policies
+  policies = [
+    {
+      name   = "${var.namespace}-${var.environment}-s3-access"
+      policy_json = data.aws_iam_policy_document.s3.json
+    }
+  ]
+  aws_managed_iam_policy_names = [
+    "ReadOnlyAccess"
+  ]
+
+  tags = module.tags.tags
 }
 ```
 
@@ -55,7 +77,7 @@ No modules.
 | <a name="input_github_subscriptions"></a> [github\_subscriptions](#input\_github\_subscriptions) | GitHub repo subscriptions for AWS account access | `list(string)` | n/a | yes |
 | <a name="input_github_thumbprint_list"></a> [github\_thumbprint\_list](#input\_github\_thumbprint\_list) | GitHub thumbprint list | `list(string)` | <pre>[<br>  "6938fd4d98bab03faadb97b34396831e3780aea1",<br>  "1c58a3a8518e8759bf075b76b750d4f2df264fcd"<br>]</pre> | no |
 | <a name="input_namespace"></a> [namespace](#input\_namespace) | Namespace for the resources. | `string` | n/a | yes |
-| <a name="input_policies"></a> [policies](#input\_policies) | The IAM policies to create and attach to the IAM role for managing AWS resources | <pre>list(object({<br>    name   = string<br>    path   = optional(string, "/")<br>    policy = any<br>  }))</pre> | `[]` | no |
+| <a name="input_policies"></a> [policies](#input\_policies) | The IAM policies to create and attach to the IAM role for managing AWS resources | <pre>list(object({<br>    name        = string<br>    path        = optional(string, "/")<br>    policy_json = any<br>  }))</pre> | `[]` | no |
 | <a name="input_role_max_session_duration"></a> [role\_max\_session\_duration](#input\_role\_max\_session\_duration) | Session duration of the assumed role | `number` | `3600` | no |
 | <a name="input_role_name_override"></a> [role\_name\_override](#input\_role\_name\_override) | Base name to assign resources. If null, it will default to `{var.namespace}-{var.environment}-github-oidc` | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Tags to assign created resources | `map(string)` | `{}` | no |
