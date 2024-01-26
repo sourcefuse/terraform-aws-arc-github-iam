@@ -51,7 +51,7 @@ variable "role_name_override" {
 
 variable "role_max_session_duration" {
   type        = number
-  description = "Session duration of the assumed role"
+  description = "Session duration of the assumed role, in seconds"
   default     = 3600
 }
 
