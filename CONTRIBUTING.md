@@ -1,5 +1,5 @@
 # Contributing to ARC GitHub IAM
-Thank you for considering contributing to ARC GitHub IAM! We appreciate your time and effort. 
+Thank you for considering contributing to ARC GitHub IAM! We appreciate your time and effort.
 To ensure a smooth collaboration, please take a moment to review the following guidelines.
 
 ## How to Contribute
@@ -39,4 +39,3 @@ GitHub Actions are in place to perform security and compliance checks. Please ma
 
 ## Licensing
 By contributing, you agree that your contributions will be licensed under the project's [LICENSE](LICENSE).
-
