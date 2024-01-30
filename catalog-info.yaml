@@ -14,7 +14,7 @@ metadata:
       title: ARC Docs
       icon: dashboard
     - url: https://sourcefuse.github.io/arc-docs/arc-iac-docs/modules/terraform-aws-arc-github-iam/
-      title: ARC DB Docs
+      title: ARC GitHub IAM Docs
       icon: dashboard
 spec:
   type: service
