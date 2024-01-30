@@ -24,6 +24,12 @@ jobs:
           user_name: ${{ github.actor }}
           commit_message: ${{ github.event.head_commit.message }}
 
+  transfer-file-usage-guide:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
       - name: Pushes Usage Guide
         uses: dmnemec/copy_file_to_another_repo_action@main
         env:
