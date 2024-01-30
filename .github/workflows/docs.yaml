@@ -38,7 +38,7 @@ jobs:
         with:
           source_file: '.docs/terraform-aws-arc-github-iam-module-usage-guide.md'
           destination_repo: 'sourcefuse/arc-docs'
-          destination_folder: 'docs/arc-iac-docs/modules/terraform-aws-arc-github-iam/.docs/terraform-aws-arc-github-iam-module-usage-guide.md'
+          destination_folder: 'docs/arc-iac-docs/modules/terraform-aws-arc-github-iam/.docs'
           user_email: 'github-actions@github.com'
           user_name: ${{ github.actor }}
           commit_message: ${{ github.event.head_commit.message }}
