@@ -8,7 +8,7 @@ To ensure a smooth collaboration, please take a moment to review the following g
    ```bash
    git clone https://github.com/<your_organization>/<your_terraform_module>.git
    ```
-3. Create a new branch for your feature/bugfix.
+3. Create a new branch for your feature / bugfix.
    ```bash
    git checkout -b feature/branch_name
    ```
