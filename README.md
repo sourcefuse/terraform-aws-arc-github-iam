@@ -1,5 +1,3 @@
-![Module Banner](./static/banner.png)
-
 # [terraform-aws-arc-github-iam](https://github.com/sourcefuse/terraform-aws-arc-github-iam)
 
 > **Module:** `sourcefuse/arc-github-iam/aws`
